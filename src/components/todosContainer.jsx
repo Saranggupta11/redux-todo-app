@@ -2,7 +2,7 @@ import { Box, Grid, Typography, Divider, List, ListItem } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-
+import TodoListItem from "./todoListItem";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 20,
@@ -28,7 +28,12 @@ export default function TodosContainer() {
           <Divider />
           <List>
             {todos.map((todo) => {
-              return <ListItem dense></ListItem>;
+              if (!todo.completed) {
+                return <TodoListItem {...todo} />;
+              }
+              else{
+                  return null
+              }
             })}
           </List>
         </Grid>
@@ -37,6 +42,16 @@ export default function TodosContainer() {
             Completed
           </Typography>
           <Divider />
+          <List>
+            {todos.map((todo) => {
+              if (todo.completed) {
+                return <TodoListItem {...todo} />;
+              }
+              else{
+                  return null
+              }
+            })}
+          </List>
         </Grid>
       </Grid>
     </Box>

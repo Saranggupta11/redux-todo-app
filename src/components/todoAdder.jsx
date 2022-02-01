@@ -4,8 +4,15 @@ import { ADD_TODO } from "../redux/actions";
 import { useDispatch } from "react-redux";
 export default function TodoAdder() {
   const [title, setTitle] = useState(null);
+  const dispatch = useDispatch();
   const handleClick = () => {
-
+    dispatch({
+      type: ADD_TODO,
+      payload: {
+        title,
+      }
+    })
+    setTitle(null);
   };
   return (
     <Box>
