@@ -1,18 +1,22 @@
 import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ADD_TODO } from "../redux/actions";
 import { useDispatch } from "react-redux";
 export default function TodoAdder() {
   const [title, setTitle] = useState(null);
+  const titleFieldRef = useRef(null);
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch({
-      type: ADD_TODO,
-      payload: {
-        title,
-      }
-    })
+    if (title) {
+      dispatch({
+        type: ADD_TODO,
+        payload: {
+          title,
+        },
+      });
+    }
     setTitle(null);
+    titleFieldRef.current.value = "";
   };
   return (
     <Box>
@@ -21,6 +25,7 @@ export default function TodoAdder() {
         style={{
           width: 400,
         }}
+        inputRef={titleFieldRef}
         variant="filled"
         label="Add new Todo"
         onChange={(e) => setTitle(e.target.value)}

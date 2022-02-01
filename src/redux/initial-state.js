@@ -22,7 +22,7 @@ export const initialState = {
       id: 4,
       title: "Item 4",
       completed: false,
-      important: false,
+      important: true,
     },
   ],
 };
