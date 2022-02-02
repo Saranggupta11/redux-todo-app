@@ -6,6 +6,10 @@ import {
   TOGGLE_IMPORTANT,
 } from "./actions";
 import shortid from "shortid";
+
+function saveState(state){
+window.localStorage.setItem("todos",JSON.stringify(state))
+}
 function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
@@ -17,6 +21,7 @@ function reducer(state = initialState, action) {
           { id: shortid(), title, completed: false, important: false },
         ],
       };
+      saveState(newState);
       return newState;
     case TOGGLE_TODO:
       const newTodos = state.todos.map((todo) => {

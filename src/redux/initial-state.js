@@ -1,4 +1,6 @@
-export const initialState = {
+export const initialState = JSON.parse(
+  window.localStorage.getItem("todos")
+) || {
   todos: [
     {
       id: 1,
